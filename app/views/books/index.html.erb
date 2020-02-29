@@ -13,7 +13,7 @@
       <tr>
        <td><%= book.Title %></td>
        <td><%= book.Body %></td>
-      </tr>
+       <td><%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %></td>
      <% end %>
     </tbody>
   </table>
@@ -29,5 +29,5 @@
     <%= f.text_area :Body %>
  
     <%= f.submit 'Create Book' %>
- 
+
 <% end %>

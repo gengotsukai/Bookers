@@ -18,7 +18,13 @@ class BooksController < ApplicationController
   def update
       book = Book.find(params[:id])
       book.update(book_params)
-      redirect_to book_path(list.id)
+      redirect_to book_path(book.id)
+  end
+
+  def destroy
+      book = Book.find(params[:id]) #データ(レコード)を1件取得
+      book.destroy #データ（レコード）を削除
+      redirect_to books_path #List一覧画面へリダイレクト
   end
 
   def create
