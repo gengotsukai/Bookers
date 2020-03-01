@@ -18,7 +18,7 @@ class BooksController < ApplicationController
   def update
       book = Book.find(params[:id])
       book.update(book_params)
-      redirect_to book_path(book.id)
+      redirect_to book_path(book.id), flash: { notice: 'Book was successfully updated.' }
   end
 
   def destroy
@@ -29,12 +29,17 @@ class BooksController < ApplicationController
 
   def create
         # ストロングパラメーターを使用
-         book = Book.new(book_params)
+         @book = Book.new(book_params)
         # DBへ保存する
-         book.save
+         if @book.save
         # トップ画面へリダイレクト
-        redirect_to book_path(book.id)
+        redirect_to book_path(@book.id), flash: { notice: 'Book was successfully created.' }
+      else
+        @books = Book.all
+        render :index
+      end
     end
+    
     private
    
    def book_params
